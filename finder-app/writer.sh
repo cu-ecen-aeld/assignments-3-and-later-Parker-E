@@ -7,10 +7,7 @@ if  [ -z $1 ] || [ -z $2 ]; then
 fi
 
 if [ ! -d ${path%/*} ]; then
-	if [ ! mkdir -p ${path%/*} ]; then
-		echo "Error: Issue creating directory to file."
-		exit 1
-	fi
+	mkdir -p ${path%/*}
 fi
 
 if touch $1; then
