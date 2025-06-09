@@ -1,4 +1,8 @@
 #include "systemcalls.h"
+#include <unistd.h>
+#include <stdlib.h>
+#include <sys/types.h>
+#include <sys/wait.h>
 
 /**
  * @param cmd the command to execute with system()
@@ -16,8 +20,15 @@ bool do_system(const char *cmd)
  *   and return a boolean true if the system() call completed with success
  *   or false() if it returned a failure
 */
+	int sys_ret;
 
-    return true;
+	sys_ret = system(cmd);
+
+	if (sys_ret != 0 || sys_ret != -1 || sys_ret != 127) {
+		return true;
+	} else {
+		return false;
+	}
 }
 
 /**
@@ -59,6 +70,27 @@ bool do_exec(int count, ...)
  *
 */
 
+    if (command[0][0] != '/')
+	return false;
+
+    if (count > 2) {
+	if (command[2][0] != '/')
+		return false;
+    }
+
+    int status;
+    pid_t pid;
+
+    pid = fork();
+    if (pid == -1)
+	return false;
+    else if (pid == 0) {
+	execv(command[0], command);
+	exit(-1);
+    }
+    if (waitpid(pid, &status, 0) == -1)
+	return false;
+
     va_end(args);
 
     return true;
@@ -92,6 +124,27 @@ bool do_exec_redirect(const char *outputfile, int count, ...)
  *   The rest of the behaviour is same as do_exec()
  *
 */
+    if (command[0][0] != '/')
+	return false;
+
+    if (count > 2) {
+	if (command[2][0] != '/')
+		return false;
+    }
+
+    int status;
+    pid_t pid;
+    fflush(stdout);
+    pid = fork();
+    if (pid == -1)
+	return false;
+    else if (pid == 0) {
+	freopen(outputfile, "w", stdout);
+	execv(command[0], command);
+	exit(-1);
+    }
+    if (waitpid(pid, &status, 0) == -1)
+	return false;
 
     va_end(args);
 
