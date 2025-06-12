@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/bin/sh
 filesdir=$1
 searchstr=$2
 if [ -z "$filesdir" ] || [ -z "$searchstr" ]; then
@@ -16,8 +16,8 @@ linecount=0
 filescount=0
 
 for i in $(find $1 -type f -exec grep -hc $2 {} \; | grep -v 0); do
-	((linecount+=$i))
-	((filescount+=1))
+	linecount=$((linecount+$i))
+	filescount=$((filescount+1))
 done
 
 echo "The number of files are ${filescount} and the number of matching lines are ${linecount}"
