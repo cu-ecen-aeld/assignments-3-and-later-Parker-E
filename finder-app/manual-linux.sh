@@ -67,7 +67,7 @@ if [ ! -d "${OUTDIR}/busybox" ]
 then
     #git clone git://busybox.net/busybox.git
     tar -xjvf ${FINDER_APP_DIR}/busybox-1.33.1.tar.bz2
-    mv ${FINDER_APP_DIR}/busybox-1.33.1 busybox
+    mv busybox-1.33.1 busybox
     cd busybox
     #git checkout ${BUSYBOX_VERSION}
     # TODO:  Configure busybox
