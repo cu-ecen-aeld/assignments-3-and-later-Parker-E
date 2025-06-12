@@ -98,7 +98,7 @@ sudo mknod -m 666 ${OUTDIR}/rootfs/dev/console c 5 1
 
 # TODO: Clean and build the writer utility
 
-cd ~/Desktop/assignments/assignment-1-Parker-E/finder-app
+cd ${FINDER_APP_DIR}
 make clean
 make CROSS-COMPILE=${CROSS_COMPILE} all
 # TODO: Copy the finder related scripts and executables to the /home directory
