@@ -13,8 +13,6 @@ FINDER_APP_DIR=$(realpath $(dirname $0))
 ARCH=arm64
 CROSS_COMPILE=aarch64-none-linux-gnu-
 
-df -h
-rm -rf busybox
 
 if [ $# -lt 1 ]
 then
@@ -67,9 +65,11 @@ mkdir -p var/log
 cd "$OUTDIR"
 if [ ! -d "${OUTDIR}/busybox" ]
 then
-git clone --depth 1 git://busybox.net/busybox.git
+    #git clone git://busybox.net/busybox.git
+    tar -xjvf ${FINDER_APP_DIR}/busybox-1.33.1.tar.bz2
+    mv ${FINDER_APP_DIR}/busybox-1.33.1 busybox
     cd busybox
-    git checkout ${BUSYBOX_VERSION}
+    #git checkout ${BUSYBOX_VERSION}
     # TODO:  Configure busybox
     make distclean
     make defconfig
