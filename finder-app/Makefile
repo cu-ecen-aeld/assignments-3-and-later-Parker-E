@@ -13,10 +13,10 @@ endif
 all: $(EXE)
 
 $(OBJ): $(SRC)
-	$(CC) $(CFLAGS) -c -o $(OBJ) $(SRC)
+	$(CC) $(CFLAGS) -o $(OBJ) $(SRC)
 
 $(EXE): $(OBJ)
-	$(CC) -I/ -o $(EXE) $(OBJ)
+	$(CC) -o $(EXE) $(OBJ)
 
 clean:
 	rm -f *.o writer *.elf *.map
