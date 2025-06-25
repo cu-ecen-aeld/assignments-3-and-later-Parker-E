@@ -13,7 +13,7 @@ endif
 all: $(EXE)
 
 $(EXE): $(SRC)
-	$(CC) $(CFLAGS) $(EXE) -o $(SRC)
+	$(CC) $(CFLAGS) $(SRC) -o $(EXE)
 
 clean:
 	rm -f *.o writer *.elf *.map
