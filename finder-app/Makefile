@@ -12,11 +12,8 @@ endif
 
 all: $(EXE)
 
-$(OBJ): $(SRC)
-	$(CC) $(CFLAGS) -o $(OBJ) $(SRC)
-
-$(EXE): $(OBJ)
-	$(CC) -o $(EXE) $(OBJ)
+$(EXE): $(SRC)
+	$(CC) $(CFLAGS) $(EXE) -o $(SRC)
 
 clean:
 	rm -f *.o writer *.elf *.map
